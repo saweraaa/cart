@@ -3,388 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <style>
-        .shopping-cart{
-            text-align: center;
-            font-size: larger;
-            font-weight:bold;
-            margin-top: 70px;
-            margin-bottom:10px;
-        }
-        .page-route{
-            text-align: center;
-            font-size: small;
-            margin-bottom: 70px;
-            color: #414141;
-        }
-        .product-table{
-            position: relative;
-            /* height: 100vh; */
-        }
-        table{
-            width: 100%; /* Make the table full width */
-            border-collapse: collapse;
-            margin: auto;
-            width: 67%;
-        }
-        .quantity-selector {
-    display: flex;
-    align-items: center;
-}
-
-.quantity-decrease, .quantity-increase {
-    background: none;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-}
-
-.quantity-input {
-    width: 30px;
-    text-align: center;
-    border: 1px solid #ccc;
-    /* margin: 0 5px; */
-}
-
-th, td {
-  border-bottom: 1px solid #ddd; /* Add borders to cells */
-  padding: 8px; /* Add padding to cells */
-  text-align: start; /* Center content within cells */
-  font-family:Arial, Helvetica, sans-serif;
-  font-size: small;
-  /* margin: 30px 0px; */
-
-}
-
-
-#product-cell{
-    display: flex;
-    align-items: center;
-    /* margin: 30px 0px; */
-
-}
-.product-image {
-  max-width: 100px; /* Set maximum width for product image */
-  margin-right: 10px;
-}
-
-.product-details {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /*Align product name and remove button to the left*/
-  flex-grow: 1;
-  margin-bottom: 30px;
-}
-
-.remove-button {
-  margin-top: 7px; /* Add margin to remove button */
-  
-  border: none;
-  background-color: white;
-  font-weight: 600;
-  border-bottom: solid 2px black;
-  transition: border-width 0.3s ease-in-out, border-color 0.3s ease-in-out;
-  
-}
-.remove-button:hover{
-    /* border-color: #ccc; */
-    animation: border-animation 1s infinite;
-}
-@keyframes border-animation {
-  0% {
-    border-color: whitesmoke;
-  }
-  50% {
-    border-color: black;
-  }
-  100% {
-    border-color: white;
-  }
-}
-
-
-.quantity-selector {
-  display: flex;
-  justify-content: space-between; /* Space buttons evenly */
-}
-
-#NSC{
-    display: flex;
-    margin-left: 999px;
-    margin-top: 30px;
-    border-bottom: solid 1px grey;
-    width: 200px;
-    
-}
-#notes, #shipping, #coupon{
-    height: 37px;
-    width: 60px;
-}
-.subtotal{
-    margin-left: 999px;
-    width: 200px;
-    position: relative;
-}
-.subtotal1{
-    display: flex;
-}
-#subtotal2{
-    position: absolute;
-    right: 0;
-    /* margin-left: 150px; */
-}
-.checkout{
-    position: relative;
-    margin-left: 999px;
-
-
-}
-#checkout-button{
-    height: 40px;
-    width: 200px;
-    background-color: black;
-    border-radius: 10px;
-    border: solid black;
-    color: white;
-}
-.shoppay{
-    margin-left: 999px;
-}
-#shoppay-button{
-    height: 33px;
-    width: 80px;
-    /* background-color: rgba(77, 25, 166, 0.664);
-    border-radius: 6px;
-    border: solid darkslateblue;
-    color: white;
-    font-weight: bold;
-    font-size: x-small; */
-    background-image: url(shoppay.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.G-shop-pay{
-    display: flex;
-}
-#gpay-button{
-    height: 33px;
-    width: 55px;
-    background-image: url(gpay.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin-left: 40px;
-}
-/* .gpay{
-    margin-left: 999px;
-} */
-
-.progress-container {
-    width: 80%;
-    background-color: #e0e0e0;
-    border-radius: 25px;
-    margin-bottom: 20px;
-}
-
-.progress-bar {
-    height: 30px;
-    width: 0%;
-    background-color: #4caf50;
-    border-radius: 25px;
-    text-align: center;
-    line-height: 30px;
-    color: white;
-}
-
-#progressbar-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    
-    cursor: pointer;
-}
-</style>
+    <title>Payment checkout</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-
 <body>
-    <div class="cart">
-        <div class="shopping-cart">
-           Shopping Cart
-        </div>
-        <div class="page-route">
-            Home  >  Your Shopping cart
-        </div>
-        <div class="progress-bar">
-            <div class="bar-title"></div>
-            <div class="bar"></div>
-        </div>
-<!-- progress bar -->
-
-<!-- <div class="progress-container">
-    <div class="progress-bar" id="progress-bar"></div>
-</div>
-<button onclick="increaseProgress()" id="progressbar-btn">Increase Progress</button> -->
-
-
-<!-- product table -->
-        <div class="product-table">
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td id="product-cell">
-                            <img src="https://th.bing.com/th/id/R.fe7b6af9239816d542194bbe85cd3fa8?rik=njLkzXR4lY7N2g&riu=http%3a%2f%2fimages.unsplash.com%2fphoto-1530018607912-eff2daa1bac4%3fixlib%3drb-1.2.1%26q%3d80%26fm%3djpg%26crop%3dentropy%26cs%3dtinysrgb%26w%3d1080%26fit%3dmax%26ixid%3deyJhcHBfaWQiOjEyMDd9&ehk=9Cq7R2GgqJ3KUFkkkzE5yrmX24tProyg8Hiu7ILS2%2bo%3d&risl=&pid=ImgRaw&r=0" alt="Upplyst LED Wall Lamp" class="product-image">
-                            <div class="product-details">
-                                <div class="product-name">Upplyst LED Wall Lamp</div>
-                                <button class="remove-button">Remove</button>
+   <nav>
+        <h1>MegaMog Shopify theme</h1>
+        <img src="images/cart.PNG" alt="cart">
+    </nav>
+    <div class="container">
+        <div class="row row1">
+            <div class="col-md-6 col-sm-12 left">
+                <div class="contact">
+                    <h3>Contact</h3>
+                    <a href="#">login</a>
+                </div>
+                <!-- Moved the submit button inside the form -->
+                <form id="contactForm">
+                    <input class="email" type="text" id="contact" name="contact" placeholder="Enter phone or email" required>
+                    <label>
+                        <input type="checkbox" name="newsletter" id="newsletter">
+                        Email me with news and updates
+                    </label>
+                    <br>
+                    <br>
+                    <div class="delivery">
+                        <h3>Delivery</h3>
+                        <select id="country" class="select">
+                            <option value="">Select a country</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="DE">Germany</option>
+                            <option value="FR">France</option>
+                        </select>
+                        <div class="first-and-last-name">
+                            <input class="firstName" type="text" placeholder="First Name (optional)">
+                            <input class="lastName" type="text" placeholder="Last Name">
+                        </div>
+                        <input type="text" placeholder="Address" class="address">
+                        <input type="text" placeholder="Appartment, Suite, etc. (Optional)" class="appartment">
+                        <div class="city-and-zip">
+                            <input type="text" name="City" placeholder="City" class="city">
+                            <select id="city" class="city">
+                                <option value="">Select a city</option>
+                            </select>
+                            <input type="text" placeholder="ZIP CODE" class="zipCode">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="shipping">
+                        <h4>Shipping</h4>
+                        <input type="text" class="shipping-address" placeholder="Enter your shipping address to view available shipping methods.">
+                    </div>
+                    <br>
+                    <div class="payment">
+                        <h3>Payment</h3>
+                        <p>All transactions are secured and encrypted.</p>
+                    </div>
+                    <div class="payment-form">
+                        <form action="" id="payment-method">
+                            <input type="number" placeholder="Card number" class="card">
+                            <div class="expiration-security">
+                                <input type="text" placeholder="Expiration date (MM / YY)" class="exp-date">
+                                <input type="number" placeholder="Security code" class="sec-code">
                             </div>
-                        </td>
-                        <td class="price" data-price="16.99">$16.99</td>
-                        <td>
-                            <div class="quantity-selector">
-                                <button class="quantity-decrease">-</button>
-                                <input type="number" value="1" class="quantity-input">
-                                <button class="quantity-increase">+</button>
-                            </div>
-                        </td>
-                        <td class="total">$16.99</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div id="NSC"> 
-        <div class="note">
-            <a href="#">
-                <img src="notes.png" alt="notes" id="notes">
-            </a>
-
-        </div>
-        <div class="shipping">
-            <a href="#">
-                <img src="shipping.png" alt="shipping" id="shipping">
-            </a>
-          
-        </div>
-        <div class="coupon">
-            <a href="#">
-                <img src="coupon.png" alt="coupon" id="coupon">
-            </a>
-            
-        </div>
-        </div>
-
-        <div class="subtotal">
-            <div class="subtotal1">
-                <p><strong>Subtotal</strong> </p>
-                <p id="subtotal2"><strong>$237.86</strong></p>
-            </div>
-            <p>Taxes and shipping calculated at checkout
-            </p>
-        </div>
-
-        <div class="checkout">
-            <a href="#">
-                <button id="checkout-button">Check Out</button>
-            </a>
-            
-        </div>
-        <br>
-        <div class="G-shop-pay">
-            <div class="shoppay">
-                <a href="">
-                    <button id="shoppay-button"></button>
-                </a>
-                
-            </div>
-            <div class="Gpay">
-                <a href="">
-                    
-                    <button id="gpay-button"></button>
-                </a>
+                            <input type="text" placeholder="Name on card" class="card-name">
+                            <label>
+                                <input type="checkbox" name="billing-address" id="billing-address">
+                                Use shipping address as billing address
+                            </label>
+                        </form>
+                    </div>
+                    <br>
+                    <div class="checkbox-container">
+                        <h4>Remember me</h4>
+                        <label>
+                            <input type="checkbox" name="save-info" class="save-info">
+                            Save my information for a faster checkout
+                        </label>
+                    </div>
+                    <div style="display: flex; align-items: center; height: 2%;">
+                        <i class="fas fa-lock lock"></i>
+                        <p style="margin-left: 3%; margin-top: 4%; color:gray; font-size: small;">Secure and encrypted</p>
+                    </div>
+                    <br>
+                    <!-- Moved the submit button inside the form -->
+                    <input type="submit" value="Pay now" class="pay-now">
+                </form>
             </div>
         </div>
-       
     </div>
+    <script src="script.js"></script>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-<script>
-    // progress bar
-    let progress = 0;
-
-function increaseProgress() {
-    if (progress < 100) {
-        progress += 10;
-        document.getElementById('progress-bar').style.width = progress + '%';
-        document.getElementById('progress-bar').innerText = progress + '%';
-    }
-}
-
-    // progress bar end
-    document.querySelectorAll('.quantity-decrease').forEach(button => {
-    button.addEventListener('click', () => {
-        const input = button.nextElementSibling;
-        const row = button.closest('tr');
-        const priceCell = row.querySelector('.price');
-        const totalCell = row.querySelector('.total');
-        const basePrice = parseFloat(priceCell.getAttribute('data-price'));
-
-        if (input.value > 1) {
-            input.value--;
-            const quantity = parseInt(input.value);
-            const newTotal = basePrice * quantity;
-            totalCell.textContent = `$${newTotal.toFixed(2)}`;
-        }
-        updateGrandTotal();
-    });
-});
-
-document.querySelectorAll('.quantity-increase').forEach(button => {
-    button.addEventListener('click', () => {
-        const input = button.previousElementSibling;
-        const row = button.closest('tr');
-        const priceCell = row.querySelector('.price');
-        const totalCell = row.querySelector('.total');
-        const basePrice = parseFloat(priceCell.getAttribute('data-price'));
-
-        input.value++;
-        const quantity = parseInt(input.value);
-        const newTotal = basePrice * quantity;
-        totalCell.textContent = `$${newTotal.toFixed(2)}`;
-
-        updateGrandTotal();
-    });
-});
-
-document.querySelectorAll('.remove-button').forEach(button => {
-    button.addEventListener('click', (e) => {
-        const row = e.target.closest('tr');
-        row.parentNode.removeChild(row);
-        updateGrandTotal();
-    });
-});
-
-function updateGrandTotal() {
-    let grandTotal = 0;
-    document.querySelectorAll('.total').forEach(totalCell => {
-        grandTotal += parseFloat(totalCell.textContent.replace('$', ''));
-    });
-
-    // Here you can update the grand total in your table if needed
-    // For example, if you have a grand total cell with id "grand-total":
-    // document.getElementById('grand-total').textContent = `$${grandTotal.toFixed(2)}`;
-}
-
-
-
-
-    // 
-   
-</script>
 </html>
